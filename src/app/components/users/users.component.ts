@@ -10,9 +10,7 @@ export class UsersComponent implements OnInit {
   users: User[];
   showExtended: boolean = true;
   enableAdd: boolean = true;
-  currentClasses = {};
-  currentStyle = {};
-
+  
   constructor () { }
 
   ngOnInit() {
@@ -26,8 +24,8 @@ export class UsersComponent implements OnInit {
           city: 'Boston',
           state: 'MA'
         },
-        image: 'http://lorempixel.com/600/600/people/3',
-        isActive: true
+        isActive: true,
+        registered: new Date('01/01/2018 08:30:00')
       },
       {
         firstName: 'Kevin',
@@ -38,8 +36,8 @@ export class UsersComponent implements OnInit {
           city: 'New York',
           state: 'NY'
         },
-        image: 'http://lorempixel.com/600/600/people/2',
-        isActive: false
+        isActive: false,
+        registered: new Date('03/24/2017 18:05:00')
       },
       {
         firstName: 'Sarah',
@@ -50,8 +48,8 @@ export class UsersComponent implements OnInit {
           city: 'Huston',
           state: 'TX'
         },
-        image: 'http://lorempixel.com/600/600/people/1',
-        isActive: true
+        isActive: true,
+        registered: new Date('11/10/2016 14:45:00')
       }
     ];
 
@@ -61,25 +59,10 @@ export class UsersComponent implements OnInit {
       isActive: false
     })
 
-    this.setCurrentClasses();
-    this.setCurrentStyle();
   }
 
   addUser(user: User): void {
     this.users.push(user)
   }
 
-  setCurrentClasses(): void {
-    this.currentClasses = {
-      'btn-success': this.enableAdd,
-      'big-text': this.showExtended
-    }
-  }
-
-  setCurrentStyle(): void {
-    this.currentStyle = {
-      'padding-top': this.showExtended ? '0' : '40px',
-      'font-size': this.showExtended ? '' : '40px'
-    }
-  }
 }
