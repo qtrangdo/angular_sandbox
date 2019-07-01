@@ -8,8 +8,10 @@ import { User } from 'src/app/models/User';
 })
 export class UsersComponent implements OnInit {
   users: User[];
-  showExtended: boolean = false;
-  enableAdd: boolean = false;
+  showExtended: boolean = true;
+  enableAdd: boolean = true;
+  currentClasses = {};
+  currentStyle = {};
 
   constructor () { }
 
@@ -18,13 +20,14 @@ export class UsersComponent implements OnInit {
       {
         firstName: 'John',
         lastName: 'Doe',
-        age: 30,
+        age: 70,
         address: {
           street: '50 Main St',
           city: 'Boston',
           state: 'MA'
         },
-        image: 'http://lorempixel.com/600/600/people/3'
+        image: 'http://lorempixel.com/600/600/people/3',
+        isActive: true
       },
       {
         firstName: 'Kevin',
@@ -35,7 +38,8 @@ export class UsersComponent implements OnInit {
           city: 'New York',
           state: 'NY'
         },
-        image: 'http://lorempixel.com/600/600/people/2'
+        image: 'http://lorempixel.com/600/600/people/2',
+        isActive: false
       },
       {
         firstName: 'Sarah',
@@ -46,17 +50,36 @@ export class UsersComponent implements OnInit {
           city: 'Huston',
           state: 'TX'
         },
-        image: 'http://lorempixel.com/600/600/people/1'
+        image: 'http://lorempixel.com/600/600/people/1',
+        isActive: true
       }
     ];
 
     this.addUser({
       firstName: 'Tom',
       lastName: 'Fills',
+      isActive: false
     })
+
+    this.setCurrentClasses();
+    this.setCurrentStyle();
   }
 
   addUser(user: User): void {
     this.users.push(user)
+  }
+
+  setCurrentClasses(): void {
+    this.currentClasses = {
+      'btn-success': this.enableAdd,
+      'big-text': this.showExtended
+    }
+  }
+
+  setCurrentStyle(): void {
+    this.currentStyle = {
+      'padding-top': this.showExtended ? '0' : '40px',
+      'font-size': this.showExtended ? '' : '40px'
+    }
   }
 }
