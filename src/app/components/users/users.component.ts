@@ -10,7 +10,7 @@ export class UsersComponent implements OnInit {
   users: User[];
   showExtended: boolean = true;
   enableAdd: boolean = true;
-  
+
   constructor () { }
 
   ngOnInit() {
@@ -25,7 +25,8 @@ export class UsersComponent implements OnInit {
           state: 'MA'
         },
         isActive: true,
-        registered: new Date('01/01/2018 08:30:00')
+        registered: new Date('01/01/2018 08:30:00'),
+        hide: false
       },
       {
         firstName: 'Kevin',
@@ -37,7 +38,8 @@ export class UsersComponent implements OnInit {
           state: 'NY'
         },
         isActive: false,
-        registered: new Date('03/24/2017 18:05:00')
+        registered: new Date('03/24/2017 18:05:00'),
+        hide: true
       },
       {
         firstName: 'Sarah',
@@ -49,16 +51,10 @@ export class UsersComponent implements OnInit {
           state: 'TX'
         },
         isActive: true,
-        registered: new Date('11/10/2016 14:45:00')
+        registered: new Date('11/10/2016 14:45:00'),
+        hide: true
       }
     ];
-
-    this.addUser({
-      firstName: 'Tom',
-      lastName: 'Fills',
-      isActive: false
-    })
-
   }
 
   addUser(user: User): void {
