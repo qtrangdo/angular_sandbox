@@ -56,7 +56,7 @@
     </button>
   </form>
 </div>
-<ul class="list-unstyled" *ngIf="users.length > 0; else noUsers">
+<ul class="list-unstyled" *ngIf="users.length > 0 && loaded; else noUsers">
   <li class="card card-body mb-2" *ngFor='let user of users' [class.bg-light]="user.isActive">
     <h3>
       {{ user.firstName }} {{ user.lastName }}

@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/User';
+import { Observable, of } from 'rxjs';
+// Observable is to deal with async fetching data
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  users: User[]
+  users: User[];
+  data: Observable<Array<any>>;
 
-  constructor() { 
+  constructor () {
     this.users = [
       {
         firstName: 'John',
@@ -15,7 +18,7 @@ export class DataService {
         email: 'john.doe@gmail.com',
         isActive: true,
         registered: new Date('01/01/2018 08:30:00'),
-        hide: false
+        hide: true
       },
       {
         firstName: 'Kevin',
@@ -36,8 +39,9 @@ export class DataService {
     ];
   }
 
-  getUsers(): User[] {
-    return this.users;
+  getUsers(): Observable<User[]> {
+    return of(this.users);
+    // "of" will return as an Observable
   }
 
   addUser(user: User): void {

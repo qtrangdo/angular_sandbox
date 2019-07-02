@@ -14,6 +14,7 @@ export class UsersComponent implements OnInit {
     email: ''
   };
   users: User[];
+  loaded: boolean = false;
   showExtended: boolean = true;
   enableAdd: boolean = true;
   showUserForm: boolean = false;
@@ -22,7 +23,11 @@ export class UsersComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
-    this.users = this.dataService.getUsers();
+    // "subscribe" for an Observer
+    this.dataService.getUsers().subscribe(users => {
+      this.users = users;
+      this.loaded = true;
+    });
   }
 
   // addUser(): void {
