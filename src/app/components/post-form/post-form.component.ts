@@ -9,27 +9,31 @@ import { PostService } from '../../services/post.service';
 })
 export class PostFormComponent implements OnInit {
   @Output() newPost: EventEmitter<Post> = new EventEmitter();
+  @Output() updatedPost: EventEmitter<Post> = new EventEmitter();
   @Input() currentPost: Post;
   @Input() isEdit: boolean;
 
-  constructor(private postService: PostService) { }
+  constructor (private postService: PostService) { }
 
   ngOnInit() {
   }
 
   addPost(title: string, body: string): void {
-    if(!title || !body) {
+    if (!title || !body) {
       alert('Missing field');
     } else {
       this.postService.savePost(title, body).subscribe(post => {
         this.newPost.emit(post);
-        this.currentPost.title='';
-        this.currentPost.body='';
+        this.currentPost.title = '';
+        this.currentPost.body = '';
       })
     }
   }
 
   updatePost(): void {
-    console.log('update Post')
+    this.postService.updatePost(this.currentPost).subscribe(post => {
+      this.isEdit = false;
+      this.updatedPost.emit(post);
+    });
   }
 }

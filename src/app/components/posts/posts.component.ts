@@ -28,8 +28,35 @@ export class PostsComponent implements OnInit {
     this.posts.unshift(post)
   }
 
+  onUpdatedPost(post: Post): void {
+    this.posts.forEach((current, i) => {
+      if (post.id === current.id) {
+        this.posts.splice(i, 1);
+        this.posts.unshift(post);
+        this.isEdit = false;
+        this.currentPost = {
+          id: 0,
+          title: '',
+          body: ''
+        }
+      }
+    })
+  }
+
   editPost(post: Post): void {
     this.currentPost = post;
     this.isEdit = true;
+  }
+
+  removePost(post: Post): void {
+    if (confirm("Are you sure?")) {
+      this.postService.removePost(post).subscribe(() => {
+        this.posts.forEach((current, i) => {
+          if (post.id === current.id) {
+            this.posts.splice(i, 1);
+          }
+        })
+      })
+    }
   }
 }
