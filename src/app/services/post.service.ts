@@ -37,4 +37,8 @@ export class PostService {
     const id = typeof post === 'number' ? post : post.id;
     return this.http.delete<Post>(`${this.postUrl}/${id}`)
   }
+
+  getPost(id: string): Observable<Post> {
+    return this.http.get<Post>(`${this.postUrl}/${id}`);
+  }
 }
